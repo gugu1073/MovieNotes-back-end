@@ -3,7 +3,7 @@ exports.up = knex => knex.schema.createTable("movie_tags", table => {
   table.text("name").notNullable();
 
 
-  table.integer("note_id").references("id").inTable("notes").onDelete("CASCADE");
+  table.integer("note_id").references("id").inTable("movie_notes").onDelete("CASCADE");
   table.integer("user_id").references("id").inTable("users");
 });
 
