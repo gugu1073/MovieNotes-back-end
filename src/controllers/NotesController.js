@@ -13,10 +13,10 @@ class NotesController {
     user_id
   });
 
-  const movieTagsInsert = movie_tags.map(name => {
+  const movieTagsInsert = movie_tags.map(category => {
     return {
       note_id, 
-      name, 
+      category, 
       user_id
     }
   });
@@ -32,7 +32,7 @@ class NotesController {
   const { id } = request.params;
 
   const note = await knex("movie_notes").where({ id }).first();
-  const tags = await knex("movie_tags").where({note_id: id}).orderBy("name")
+  const tags = await knex("movie_tags").where({note_id: id}).orderBy("category")
   
 
   return response.json({
@@ -86,7 +86,7 @@ class NotesController {
 
     return {
       ...note,
-      movie_tags: noteTags
+      tags: noteTags
     }
    });
 
