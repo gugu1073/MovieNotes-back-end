@@ -24,7 +24,7 @@ class NotesController {
   await knex("movie_tags").insert(movieTagsInsert);
 
 
-  response.json()
+  return response.json()
  }
 
  //display something specific
