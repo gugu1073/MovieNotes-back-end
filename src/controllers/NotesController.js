@@ -3,10 +3,10 @@ const knex = require("../database/knex")
 class NotesController {
   
  async create(request, response) {
-  const {title, description,  rating, movie_tags,} = request.body;
+  const {title, description, movie_tags, rating  } = request.body;
   const user_id = request.user.id;
 
-  const [note_id] = await knex("movie_notes").insert({
+  const [movie_note_id] = await knex("movie_notes").insert({
     title, 
     description,
     rating,
@@ -15,8 +15,8 @@ class NotesController {
 
   const movieTagsInsert = movie_tags.map(category => {
     return {
-      note_id, 
       category, 
+      movie_note_id, 
       user_id
     }
   });
