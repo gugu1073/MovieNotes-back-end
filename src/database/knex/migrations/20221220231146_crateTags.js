@@ -1,6 +1,6 @@
 exports.up = knex => knex.schema.createTable("movie_tags", table => {
   table.increments("id");
-  table.text("category").notNullable();
+  table.text("category")
 
 
   table.integer("movie_note_id").references("id").inTable("movie_notes").onDelete("CASCADE");
