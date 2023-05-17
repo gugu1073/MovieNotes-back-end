@@ -1,15 +1,19 @@
-const userRepository = require("../repositories/userRepository")
+const UserRepository = require("../repositories/UserRepository")
 const { hash, compare } = require("bcryptjs");
 const AppError = require("../utils/AppError");
 const sqliteConnection = require("../database/sqlite");
-const UserRepository = require("../repositories/userRepository");
+const UserCreateService = require("../services/UserCreateService")
+
   
 class UsersControllers {
   async create(request, response) {
     const {name, email, password} = request.body;
     
-    
-   return response.status(201).json();
+    const userRepository = new UserRepository();
+    const userCreateService = new UserCreateService(userRepository);
+    await userCreateService.execute({name, email, password});
+
+    return response.status(201).json();
 
   }
 
